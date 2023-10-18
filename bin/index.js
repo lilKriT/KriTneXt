@@ -11,6 +11,7 @@ import {
   select,
   multiselect,
   spinner,
+  note,
 } from "@clack/prompts";
 
 // Greeting
@@ -59,10 +60,16 @@ const additionalTools = await multiselect({
   required: false,
 });
 
+let settings = `text: ${value}   \nConfirmed: ${confirmed}   \nType: ${projectType}  \nTools: ${additionalTools}`;
+note(settings, "Settings");
+
 const s = spinner();
 s.start("Installing.");
-await new Promise((resolve) => setTimeout(resolve, 3000));
+await new Promise((resolve) => setTimeout(resolve, 500));
 s.stop("Installed.");
+
+let nextSteps = "cd path    \ninstall   \ndev";
+note(nextSteps, "Next Steps");
 
 // Installing next
 // const nextInstall =
