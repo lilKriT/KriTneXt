@@ -14,6 +14,9 @@ import {
   note,
 } from "@clack/prompts";
 import fs from "fs";
+import * as something from "../templates/example.js";
+
+console.log(something);
 
 // Greeting
 // console.log("Installing Next. The lilKriT way.");
@@ -38,15 +41,6 @@ if (isCancel(projectName)) {
 
 // There are just examples for now.
 /*
-const confirmed = await confirm({
-  message: "Do you want to continue?",
-});
-
-if (isCancel(confirmed) || !confirmed) {
-  cancel("Operation canceled.");
-  process.exit(0);
-}
-
 const projectType = await select({
   message: "Pick a project type.",
   options: [
@@ -65,18 +59,9 @@ const additionalTools = await multiselect({
   required: false,
 });
 
-let settings = `text: ${projectName}   \nConfirmed: ${confirmed}   \nType: ${projectType}  \nTools: ${additionalTools}`;
-note(settings, "Settings");
-
-const s = spinner();
-s.start("Installing.");
-await new Promise((resolve) => setTimeout(resolve, 500));
-s.stop("Installed.");
-
-let nextSteps = "cd path    \ninstall   \ndev";
-note(nextSteps, "Next Steps");
 */
 
+// Displaying settings and asking for confirmation:
 let settingsNote = `Name: ${projectName}`;
 note(settingsNote, "Settings:");
 
@@ -88,6 +73,15 @@ if (isCancel(projectConfirmed) || !projectConfirmed) {
   cancel("Operation canceled.");
   process.exit(0);
 }
+
+// More testing:
+// fs.readFile("./templates/example.txt", "utf-8", (err, data) => {
+//   if (err) {
+//     console.error(err);
+//     return;
+//   }
+//   console.log(data);
+// });
 
 // Creating a spinner
 const s = spinner();
@@ -103,6 +97,15 @@ s.start("Installing additional libraries.");
 process.chdir(projectName);
 await $`pnpm add lodash`;
 s.stop("Additiona libraries installed.");
+
+// Replacing files with my templates:
+let replaceContent = fs.readFileSync("./templates/example.tsx", "utf-8");
+
+fs.writeFile(`app/page.tsx`, replaceContent, (err) => {
+  if (err) {
+    console.error(err);
+  }
+});
 
 // Ending message
 outro("KriTTed.");
