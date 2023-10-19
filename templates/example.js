@@ -4,4 +4,4 @@ const t = `const example = () => {
 
 export default example;`;
 
-export { t };
+export default t;

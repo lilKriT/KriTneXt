@@ -14,9 +14,9 @@ import {
   note,
 } from "@clack/prompts";
 import fs from "fs";
-import * as something from "../templates/example.js";
+import t from "../templates/templates.js";
 
-console.log(something);
+console.log(t);
 
 // Greeting
 // console.log("Installing Next. The lilKriT way.");
